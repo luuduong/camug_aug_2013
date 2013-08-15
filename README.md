@@ -20,6 +20,7 @@
 * Verify that everything is working by running the tests:
   - bundle exec ruby proofs/suite.rb 
   - You should see output similar to the following:
+
     ```bash
     GENERAL [MOVIELIBRARY] FUNCTIONALITY
 
