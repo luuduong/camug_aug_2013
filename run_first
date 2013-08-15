@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require_relative 'git_utils.rb'
+
+def install_utilities
+  `gem install path_gem`
+  `bundle install`
+end
+
+def configure_remote
+  run_git_command('remote rm jp')
+  run_git_command('remote add jp http://github.com/developwithpassion/camug_aug_2013')
+end
+
+def create_first_branches
+  %w[clean master starting_point master starting_point].each{|branch| checkout(branch)}
+end
+
+def install_local_gems
+  %w/proof initializer single setter output extension/.each do |gem|
+    `git clone http://github.com/developwithpassion/#{gem} local_gems/#{gem}` unless Dir.exist?("local_gems/#{gem}")
+  end
+end
+
+install_local_gems
+install_utilities
+configure_remote
+create_first_branches
