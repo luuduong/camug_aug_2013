@@ -15,12 +15,18 @@
 * Clone your fork of this repository (I recommend cloning it to a path without spaces)
 * Navigate to the cloned repo folder in your shell
 * Run the following commands:
-  - . ./cenv
-  - ./run_first
-  - ./start_new_exercise
+
+  ```bash
+   . ./cenv
+   ./run_first
+   ./start_new_exercise
+  ```
 
 * Verify that everything is working by running the tests:
-  - bundle exec ruby proofs/suite.rb 
+
+  ```bash
+   bundle exec ruby proofs/suite.rb 
+  ```
   - You should see output similar to the following:
 
     ```bash
