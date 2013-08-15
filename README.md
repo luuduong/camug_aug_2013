@@ -6,10 +6,12 @@
 
 #Getting Started
 
+##Send me your github username (create an account if you don't have one) - <mailto:jp@developwithpassion.com>
+
 ##Requirements
 
 * Recommend the use of a ruby version manager (such as [RVM](https://rvm.io/))
-* Fork this repository
+* Fork this repository (using the github account your provided me by email)
 * Clone your fork of this repository (I recommend cloning it to a path without spaces)
 * Navigate to the cloned repo folder in your shell
 * Run the following commands:
@@ -40,4 +42,5 @@
     ```
 
 
+We'll pick up everything else once at the beginning of the session.
 
