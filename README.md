@@ -9,7 +9,8 @@
 ##Requirements
 
 * Recommend the use of a ruby version manager (such as [RVM](https://rvm.io/))
-* Clone this repository (I recommend cloning it to a path without spaces)
+* Fork this repository
+* Clone your fork of this repository (I recommend cloning it to a path without spaces)
 * Navigate to the cloned repo folder in your shell
 * Run the following commands:
   - . ./cenv
