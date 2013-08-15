@@ -20,8 +20,7 @@
 * Verify that everything is working by running the tests:
   - bundle exec ruby proofs/suite.rb 
   - You should see output similar to the following:
-    <pre>
-    <code>
+    ```bash
     GENERAL [MOVIELIBRARY] FUNCTIONALITY
 
     General Movie Functionality
@@ -37,8 +36,7 @@
     /Volumes/machd/to_backup/repositories/presentations/camug_aug_2013/lib/movies/movie_library.rb:18:in `all_movies_published_by_pixar': undefined method `filter' for #<Array:0x007f966aa00a70> (NoMethodError)
             from /Volumes/machd/to_backup/repositories/presentations/camug_aug_2013/proofs/lib/movie_library.rb:168:in `block (4 levels) in <top (required)>'
             f
-    </code>
-    </pre>
+    ```
 
 
 
