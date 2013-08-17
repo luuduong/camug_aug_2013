@@ -212,9 +212,7 @@ heading 'General Movie Functionality' do
         sut, movie_list = build.library(original_movies)
         comparer = Compare.by_descending.key(:title)
 
-        results = sut.all.filter_using(comparer)
-
-        results = sut.sort_all_movies_by_title_descending
+        results = sut.all.sort_using(comparer)
 
         results.prove { eql? [theres_something_about_mary, your_mine_and_ours, shrek, pirates_of_the_carribean, indiana_jones_and_the_temple_of_doom, cars, a_bugs_life] }
       end
@@ -222,7 +220,7 @@ heading 'General Movie Functionality' do
       proof 'Sorts all movies by ascending title' do
         comparer = Compare.by.key(:title)
 
-        results = sut.all.filter_using(comparer)
+        results = sut.all.sort_using(comparer)
 
 
         results.prove { eql? [a_bugs_life, cars, indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean, shrek, your_mine_and_ours, theres_something_about_mary] }

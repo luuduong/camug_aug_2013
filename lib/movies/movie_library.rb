@@ -1,5 +1,6 @@
 module Movies
   class MovieLibrary
+    include ::Filtering
     attr_reader :movies
 
     def initialize(movies)
@@ -14,45 +15,49 @@ module Movies
       movies.dup
     end
 
+    def each(&block)
+      movies.each(&block)
+    end
+
     def all_movies_published_by_pixar
-      movies.filter do |movie|
+      filter do |movie|
         movie.studio == Studios::PIXAR
       end
     end
 
     def all_movies_published_by_pixar_or_disney
-      movies.filter do |movie|
+      filter do |movie|
         [Studios::PIXAR, Studios::DISNEY].include?(movie.studio)
       end
     end
 
     def all_movies_not_published_by_pixar
-      movies.filter do |movie|
+      filter do |movie|
         movie.studio != Studios::PIXAR
       end
     end
 
     def all_movies_published_after_year(year)
-      movies.filter do |movie|
+      filter do |movie|
         movie.release_date.year > year
       end
     end
 
     def all_movies_published_between_years(start_year, end_year)
-      movies.filter do |movie|
+      filter do |movie|
         year = movie.release_date.year
         year >= start_year && year <= end_year
       end
     end
 
     def all_kid_movies
-      movies.filter do |movie|
+      filter do |movie|
         movie.genre == Genres::KIDS
       end
     end
 
     def all_action_movies
-      movies.filter do |movie|
+      filter do |movie|
         movie.genre == Genres::ACTION
       end
     end
