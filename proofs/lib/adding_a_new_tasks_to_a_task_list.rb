@@ -2,11 +2,10 @@ require_relative '../proofs_init'
 
 title 'Adding Tasks'
 
-Proof.start
 
 module TaskList
   class Tasks
-    module Proofs
+    module Proof
       def includes_task?(task)
         @tasks.include?(task)
       end
@@ -42,7 +41,6 @@ proof 'Adding an existing task to a task list' do
   sut.prove { task_count?(1) }
 end
 
-Proof.end
 
 title 'Fetch a list of people from the database'
 
@@ -51,6 +49,7 @@ class Person
 
   initializer :name, :age, :birthdate
 end
+
 
 
 
