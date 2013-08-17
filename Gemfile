@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem 'null_object'
 gem 'configatron'
+gem 'fakes'
 
 path_gem 'single'
 path_gem 'initializer'

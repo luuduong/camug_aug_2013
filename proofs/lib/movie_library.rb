@@ -210,6 +210,9 @@ heading 'General Movie Functionality' do
     heading 'Sorting movies' do
       proof 'Sorts all movies by descending title' do
         sut, movie_list = build.library(original_movies)
+        comparer = Compare.by_descending.key(:title)
+
+        results = sut.all.filter_using(comparer)
 
         results = sut.sort_all_movies_by_title_descending
 
@@ -217,9 +220,10 @@ heading 'General Movie Functionality' do
       end
 
       proof 'Sorts all movies by ascending title' do
-        sut, movie_list = build.library(original_movies)
+        comparer = Compare.by.key(:title)
 
-        results = sut.sort_all_movies_by_title_ascending
+        results = sut.all.filter_using(comparer)
+
 
         results.prove { eql? [a_bugs_life, cars, indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean, shrek, your_mine_and_ours, theres_something_about_mary] }
       end
@@ -256,9 +260,20 @@ heading 'General Movie Functionality' do
 
 SPEC
         
+        compound_comparison = Compare.by.key(:studio,
+                                         Movies::Studios::MGM,
+                                         Movies::Studios::MGM,
+                                         Movies::Studios::MGM,
+                                         Movies::Studios::MGM,
+                                         Movies::Studios::MGM,
+                                        ).then.by.map do |movie|
+          movie.release_date
+        end
+
+
         sut, movie_list = build.library(original_movies)
 
-        results = sut.sort_all_movies_by_studio_preference_and_year_published
+        results = sut.all.filter_using(compound_comparison)
 
         results.prove { eql? [your_mine_and_ours, theres_something_about_mary, a_bugs_life, cars, shrek, indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean] }
       end

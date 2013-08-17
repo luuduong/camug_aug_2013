@@ -50,26 +50,56 @@ class Person
   initializer :name, :age, :birthdate
 end
 
+title 'Running a well formed query object to get data'
 
-alice = Person.new('alice', 13, '2000-01-01')
-bob = Person.new('bob', 43, '1970-01-01')
+class Querying
+  include Initializer
+
+  initializer :connection_builder
+
+  def run(query)
+    query.run(connection_builder.create)
+    query
+  end
 
 
-store = PeopleStore.new
-store.add alice
-store.add bob
+  module Proofs
+    def established_connection?
+      connection_builder.received(:create)
+    end
+
+    def ran?(query)
+      query.received(:run, arg_match.not_nil)
+    end
+  end
+end
+
+class CompositeQuery
+  include Initializer
+
+  initializer :first, :second
+
+  def !
+    first.run
+    second.run
+    self
+  end
+end
 
 
-query = PeopleQuery.new.age(gte: 21)
-query = PeopleQuery.new(age: { gte: 21 })
+proof do
+  connection_builder = fake
+  sut = Querying.new(connection_builder)
+  query = fake
 
-query = PeopleQuery.new.only(age: { gte: 21})
+  sut.run(query)
 
-query = PeopleQuery.only.age.gte(21)
-query = PeopleQuery.only(:age).gte(21)
-query = PeopleQuery.only(:age, gte: 21)
-query = PeopleQuery.only(:age, within: (20..29))
+  desc 'Creates a connection to the database'
+  sut.prove { established_connection? }
 
-adults = store.get(query)
+  desc 'Tells the query to run using the provided connection'
+  sut.prove { ran?(query) }
 
-prove { adults == [bob] }
+  desc 'Returns the query object'
+  result.prove { eql? query }
+end
