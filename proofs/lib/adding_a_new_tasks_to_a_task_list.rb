@@ -2,6 +2,22 @@ require_relative '../proofs_init'
 
 title 'Adding Tasks'
 
+Proof.start
+
+module TaskList
+  class Tasks
+    module Proofs
+      def includes_task?(task)
+        @tasks.include?(task)
+      end
+
+      def task_count?(number)
+        @tasks.count == number
+      end
+    end
+  end
+end
+
 proof 'Adding a new task to a task list' do
   sut = TaskList::Tasks.new
   task = TaskList::Task.new
@@ -9,10 +25,10 @@ proof 'Adding a new task to a task list' do
   sut.add(task)
 
   desc 'The task should be added to the list of tasks'
-  sut.prove { @tasks.include? task }
+  sut.prove { includes_task?(task) }
 
   desc 'The task list should only have one item'
-  sut.prove { @tasks.count == 1 }
+  sut.prove { task_count?(1) }
 end
 
 proof 'Adding an existing task to a task list' do
@@ -23,5 +39,24 @@ proof 'Adding an existing task to a task list' do
   sut.add(task)
 
   desc 'Should not add the task again to the list of things to complete'
-  sut.prove { @tasks.count == 1 }
+  sut.prove { task_count?(1) }
 end
+
+Proof.end
+
+title 'Fetch a list of people from the database'
+
+class Person
+  include Initializer
+
+  initializer :name, :age, :birthdate
+end
+
+
+
+
+
+
+
+
+

@@ -5,7 +5,8 @@ module TaskList
     end
 
     def add (task)
-      @tasks << task
+      @tasks << task unless @tasks.include?(task)
     end
+
   end
 end
