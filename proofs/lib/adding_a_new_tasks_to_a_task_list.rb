@@ -51,11 +51,25 @@ class Person
 end
 
 
+alice = Person.new('alice', 13, '2000-01-01')
+bob = Person.new('bob', 43, '1970-01-01')
 
 
+store = PeopleStore.new
+store.add alice
+store.add bob
 
 
+query = PeopleQuery.new.age(gte: 21)
+query = PeopleQuery.new(age: { gte: 21 })
 
+query = PeopleQuery.new.only(age: { gte: 21})
 
+query = PeopleQuery.only.age.gte(21)
+query = PeopleQuery.only(:age).gte(21)
+query = PeopleQuery.only(:age, gte: 21)
+query = PeopleQuery.only(:age, within: (20..29))
 
+adults = store.get(query)
 
+prove { adults == [bob] }
