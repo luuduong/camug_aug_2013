@@ -3,8 +3,6 @@ require 'path_gem'
 source "https://rubygems.org"
 
 gem 'null_object'
-gem 'fakes'
-gem 'rspec'
 
 path_gem 'single'
 path_gem 'initializer'
